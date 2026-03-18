@@ -23,6 +23,11 @@ import { WarningList } from './warning-list'
 import { KPILink } from './kpi-link'
 import { DataGrid } from './data-grid'
 import { HighlightBox } from './highlight-box'
+import { QuizCard } from './quiz-card'
+import { ScenarioSimulator } from './scenario-simulator'
+import { InfoCard } from './info-card'
+import { CaseStudyCard } from './case-study-card'
+import { FormulaBox } from './formula-box'
 
 const kpiItems = [
   {
@@ -198,19 +203,6 @@ const funnelStages = [
   { label: 'A — Action (AF)', description: 'Cair — disbursement aktual', percentage: 35, color: '#9FE1CB', textColor: '#085041' },
 ]
 
-const screeningFramework = [
-  {
-    icon: 'C1',
-    title: 'Cek Karakter',
-    description: 'Reputasi di lingkungan — tanya Ketua RT secara langsung. Riwayat pinjam-meminjam dengan tetangga/kerabat. Keaktifan di kegiatan komunitas (tanda tanggung jawab). Riwayat pembayaran arisan atau cicilan lain.',
-  },
-  {
-    icon: 'C2',
-    title: 'Cek Kapasitas',
-    description: 'Usaha sudah berjalan minimal 6 bulan (bukan rencana). Ada bukti fisik — toko, lapak, peralatan kerja, stok barang. Ada cashflow harian yang bisa diestimasi. Tujuan pinjaman produktif (modal kerja/ekspansi).',
-  },
-]
-
 const customerTiers = [
   {
     badge: 'A',
@@ -375,6 +367,263 @@ const paoComparisonRows = [
   { dimensi: 'Penggunaan waktu', sales: 'bad Mayoritas untuk prospecting baru', pao: 'good Mayoritas untuk mengelola relasi & kualitas' },
   { dimensi: 'Stabilitas target', sales: 'bad Fluktuasi besar bulan ke bulan', pao: 'good Konsisten mendekati atau melampaui target' },
 ]
+
+// Quiz Questions
+const bab1Quiz = [
+  {
+    question: 'Menurut Role Identity Theory, apa yang terjadi ketika PAO memiliki identitas kuat sebagai "manajer ekosistem"?',
+    options: [
+      'PAO akan lebih fokus pada target bulanan',
+      'PAO secara otomatis membuat keputusan lebih strategis dan membangun relasi lebih dalam',
+      'PAO akan lebih sering melakukan door-to-door',
+      'PAO akan mengabaikan angka KPI'
+    ],
+    correctAnswer: 1,
+    explanation: 'Role Identity Theory menyatakan bahwa identitas dengan salience tinggi akan memandu perilaku. Ketika PAO mengidentifikasi diri sebagai "manajer ekosistem", perilakunya akan lebih strategis dan fokus pada pembangunan sistem jangka panjang.'
+  },
+  {
+    question: 'Apa perbedaan utama antara Sales Tradisional dan PAO Strategic dalam hal sumber leads?',
+    options: [
+      'Sales tradisional menggunakan iklan, PAO tidak',
+      'Sales tradisional mengandalkan tenaga sendiri, PAO mengandalkan mitra komunitas',
+      'Sales tradisional fokus pada komunitas, PAO pada individu',
+      'Tidak ada perbedaan signifikan'
+    ],
+    correctAnswer: 1,
+    explanation: 'Sales tradisional harus mencari leads sendiri setiap hari (door-to-door), sementara PAO Strategic membangun sistem di mana mitra komunitas yang aktif mengirimkan leads secara rutin.'
+  },
+  {
+    question: 'Apa yang dimaksud dengan "Trust Transfer" dalam konteks PAO?',
+    options: [
+      'Transfer uang dari nasabah ke FINATRA',
+      'Kepercayaan komunitas kepada ketua yang dialihkan ke FINATRA melalui PAO',
+      'Transfer data leads dari satu komunitas ke komunitas lain',
+      'Transfer tanggung jawab dari PAO ke supervisor'
+    ],
+    correctAnswer: 1,
+    explanation: 'Trust Transfer adalah mekanisme di mana kepercayaan anggota komunitas kepada ketuanya, dialihkan menjadi kepercayaan kepada FINATRA karena ketua merekomendasikan PAO sebagai mitra.'
+  }
+]
+
+const bab2Quiz = [
+  {
+    question: 'Menurut Social Capital Theory, komunitas manakah yang menjadi target primer PAO?',
+    options: [
+      'Komunitas dengan Bridging Capital tinggi',
+      'Komunitas dengan Bonding Capital tinggi',
+      'Komunitas online yang besar',
+      'Komunitas yang sudah dikenal kompetitor'
+    ],
+    correctAnswer: 1,
+    explanation: 'Komunitas dengan Bonding Capital tinggi (RT/RW, koperasi, paguyuban) adalah target primer karena trust antar anggota sudah kuat, memudahkan PAO memanfaatkan jaringan kepercayaan yang ada.'
+  },
+  {
+    question: 'Berapa minimal persentase komunitas aktif yang harus dicapai PAO?',
+    options: ['15%', '25%', '35%', '50%'],
+    correctAnswer: 2,
+    explanation: 'Target minimal komunitas aktif adalah 35%. Artinya dari 20 komunitas terdaftar, minimal 7 harus aktif mengirim leads setiap bulan.'
+  },
+  {
+    question: 'Apa yang dimaksud dengan "Gatekeeper" dalam konteks komunitas?',
+    options: [
+      'Security guard di pintu masuk komunitas',
+      'Ketua komunitas yang memegang kunci akses ke jaringan kepercayaan',
+      'Software untuk mengontrol akses data',
+      'Petugas yang mengatur antrian nasabah'
+    ],
+    correctAnswer: 1,
+    explanation: 'Gatekeeper adalah pemimpin komunitas (Ketua RT, Kades, Pengurus Koperasi) yang memegang kunci akses ke seluruh jaringan kepercayaan komunitasnya.'
+  }
+]
+
+const bab3Quiz = [
+  {
+    question: 'Dalam AIDA Funnel, berapa target persentase leads yang lolos screening (Decision)?',
+    options: ['25%', '35%', '50%', '70%'],
+    correctAnswer: 2,
+    explanation: 'Target Leads to Order adalah 50%, artinya dari 10 leads yang masuk, minimal 5 harus lolos screening dan menjadi order.'
+  },
+  {
+    question: 'Apa saja dua komponen Framework 2C dalam screening?',
+    options: [
+      'Cek Credit dan Cek Collateral',
+      'Cek Karakter dan Cek Kapasitas',
+      'Cek Customer dan Cek Community',
+      'Cek Cashflow dan Cek Cicilan'
+    ],
+    correctAnswer: 1,
+    explanation: 'Framework 2C terdiri dari Cek Karakter (reputasi di lingkungan, riwayat pinjam-meminjam) dan Cek Kapasitas (lama usaha, bukti fisik usaha, cashflow).'
+  },
+  {
+    question: 'Berapa waktu maksimal follow-up leads agar probabilitas konversi tetap tinggi?',
+    options: ['< 1 jam', '1-24 jam', '1-3 hari', '3-7 hari'],
+    correctAnswer: 0,
+    explanation: 'Follow-up dalam < 1 jam memiliki probabilitas konversi sangat tinggi (~85%). Semakin lama ditunda, semakin dingin leads dan probabilitasnya menurun drastis.'
+  }
+]
+
+const bab4Quiz = [
+  {
+    question: 'Apa arti R1 5% dalam konteks kualitas portofolio?',
+    options: [
+      '5% dari target AF belum tercapai',
+      'Maksimal 5 dari 100 nasabah boleh menunggak di bulan pertama',
+      '5% komunitas tidak aktif',
+      '5% leads ditolak dalam screening'
+    ],
+    correctAnswer: 1,
+    explanation: 'R1 5% berarti dari 100 nasabah aktif, maksimal 5 boleh menunggak di bulan pertama. R1 tinggi menandakan ada kesalahan dalam identifikasi karakter di awal.'
+  },
+  {
+    question: 'Apa strategi terbaik untuk early warning system?',
+    options: [
+      'Menunggu nasabah telat bayar lalu menagih',
+      'Menggunakan mitra komunitas sebagai sensor lapangan',
+      'Menelepon nasabah setiap hari',
+      'Mengirim surat peringatan'
+    ],
+    correctAnswer: 1,
+    explanation: 'Mitra komunitas yang dekat dengan nasabah bisa mendeteksi tanda-tanda masalah lebih awal (usaha sepi, musibah, dll) sebelum menjadi tunggakan.'
+  },
+  {
+    question: 'Perbedaan utama PAO Berkembang vs PAO Mature dalam penggunaan waktu?',
+    options: [
+      'PAO Mature lebih sering libur',
+      'PAO Mature menghabiskan waktu untuk mengelola relasi & kualitas, bukan prospecting',
+      'PAO Mature lebih banyak meeting di kantor',
+      'Tidak ada perbedaan signifikan'
+    ],
+    correctAnswer: 1,
+    explanation: 'PAO Mature sudah memiliki sistem komunitas yang berjalan, sehingga waktanya dihabiskan untuk mengelola relasi dan kualitas, bukan mencari leads baru terus-menerus.'
+  }
+]
+
+// Scenario Simulators
+const bab1Scenario = {
+  title: 'Skenario: Pertemuan Pertama dengan Ketua RT',
+  description: 'Anda sebagai PAO baru akan bertemu Ketua RT untuk pertama kalinya. Pilih langkah yang paling tepat.',
+  steps: [
+    {
+      id: 'start',
+      situation: 'Anda tiba di rumah Ketua RT. Beliau menyambut Anda dengan ramah dan menawarkan minum.',
+      description: 'Apa yang akan Anda lakukan di awal pertemuan?',
+      choices: [
+        {
+          id: 'a',
+          text: 'Langsung menawarkan produk pinjaman FINATRA dengan bunga rendah',
+          isCorrect: false,
+          feedback: 'Kurang tepat. Menawarkan produk langsung di awal menciptakan kesan sales. Belum ada rapport yang dibangun.',
+          nextStepId: 'followup'
+        },
+        {
+          id: 'b',
+          text: 'Menanyakan kondisi warga dan tantangan usaha mereka, mendengarkan dengan sungguh-sungguh',
+          isCorrect: true,
+          feedback: 'Tepat! Datang untuk mendengar dan berkolaborasi membangun rapport kuat. Ini adalah pendekatan strategic partner.',
+          nextStepId: 'end'
+        },
+        {
+          id: 'c',
+          text: 'Meminta daftar warga yang butuh pinjaman segera',
+          isCorrect: false,
+          feedback: 'Kurang tepat. Meminta data sebelum membangun kepercayaan membuat Anda terlihat hanya mengincar target.',
+          nextStepId: 'followup'
+        }
+      ]
+    },
+    {
+      id: 'followup',
+      situation: 'Ketua RT tampak kurang tertarik setelah Anda langsung menawarkan produk.',
+      description: 'Bagaimana Anda merespons situasi ini?',
+      choices: [
+        {
+          id: 'd',
+          text: 'Minta maaf dan beralih bertanya tentang kondisi warga',
+          isCorrect: true,
+          feedback: 'Bagus! Mengakami kesalahan pendekatan dan beralih ke mode listening menunjukkan profesionalisme.',
+          nextStepId: 'end'
+        },
+        {
+          id: 'e',
+          text: 'Terus menjelaskan keunggulan produk FINATRA',
+          isCorrect: false,
+          feedback: 'Kurang tepat. Ketika rapport belum terbentuk, penjelasan produk tidak akan efektif.',
+          nextStepId: 'end'
+        }
+      ]
+    },
+    {
+      id: 'end',
+      situation: 'Pertemuan berjalan 30 menit. Anda sudah mendengar banyak tentang kondisi warga.',
+      description: 'Bagaimana Anda menutup pertemuan ini?',
+      choices: [
+        {
+          id: 'f',
+          text: 'Langsung meminta waktu sosialisasi di rapat RT minggu depan',
+          isCorrect: false,
+          feedback: 'Terlalu cepat. Minta komitmen sosialisasi butuh pembahasan benefit untuk komunitas terlebih dahulu.',
+          nextStepId: undefined
+        },
+        {
+          id: 'g',
+          text: 'Mengucapkan terima kasih, menyebut poin penting yang didengar, dan meminta izin bertemu lagi minggu depan',
+          isCorrect: true,
+          feedback: 'Tepat! Menutup dengan apresiasi dan janji follow-up membangun ekspektasi positif untuk pertemuan berikutnya.',
+          nextStepId: undefined
+        }
+      ]
+    }
+  ]
+}
+
+const bab3Scenario = {
+  title: 'Skenario: Screening Calon Nasabah',
+  description: 'Anda menerima leads dari Ketua RT. Lakukan screening dengan tepat.',
+  steps: [
+    {
+      id: 'start',
+      situation: 'Ketua RT mengirimkan nama 3 warga yang membutuhkan modal. Anda akan bertemu mereka.',
+      description: 'Apa langkah screening pertama yang Anda lakukan?',
+      choices: [
+        {
+          id: 'a',
+          text: 'Langsung proses dokumen dan ajukan ke sistem',
+          isCorrect: false,
+          feedback: 'Berisiko tinggi! Tanpa screening, Anda bisa menerima nasabah bermasalah.',
+          nextStepId: 'screening'
+        },
+        {
+          id: 'b',
+          text: 'Tanya Ketua RT tentang reputasi dan karakter masing-masing calon',
+          isCorrect: true,
+          feedback: 'Tepat! Screening karakter via gatekeeper adalah langkah pertama yang krusial.',
+          nextStepId: 'next'
+        }
+      ]
+    },
+    {
+      id: 'next',
+      situation: 'Ketua RT merekomendasikan Pak Budi paling tinggi. Anda bertemu Pak Budi.',
+      description: 'Bagaimana Anda verifikasi kapasitas usahanya?',
+      choices: [
+        {
+          id: 'c',
+          text: 'Tanya omzet dan lama usaha saja, cukup percaya pada Ketua RT',
+          isCorrect: false,
+          feedback: 'Kurang lengkap. Perlu verifikasi fisik usaha untuk memastikan keberadaannya.',
+          nextStepId: undefined
+        },
+        {
+          id: 'd',
+          text: 'Tanya detail usaha, lalu minta izin melihat tempat usaha dan bukti fisik',
+          isCorrect: true,
+          feedback: 'Tepat! Kunjungan ke tempat usaha adalah verifikasi terkuat untuk Cek Kapasitas.',
+          nextStepId: undefined
+        }
+      ]
+    }
+  ]
+}
 
 export function LearningModule() {
   const [completedChapters, setCompletedChapters] = useState<number[]>([])
@@ -573,6 +822,31 @@ export function LearningModule() {
                 Identitas profesional yang kuat adalah kompas yang mengarahkan setiap keputusan harian. Ketika kamu tahu kamu adalah seorang manajer ekosistem, bukan sekedar sales harian, kamu akan selalu memilih tindakan yang membangun sistem — bukan hanya mengejar angka jangka pendek.
               </InsightBox>
 
+              {/* Quiz Section */}
+              <div className="border-t pt-6">
+                <h4 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wide flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs">Q</span>
+                  Quiz: Uji Pemahaman Anda
+                </h4>
+                <QuizCard 
+                  title="Quiz Bab 1: Positioning & Role Identity"
+                  questions={bab1Quiz}
+                />
+              </div>
+
+              {/* Scenario Simulator */}
+              <div className="border-t pt-6">
+                <h4 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wide flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">S</span>
+                  Simulasi: Praktik Skenario Nyata
+                </h4>
+                <ScenarioSimulator 
+                  title={bab1Scenario.title}
+                  description={bab1Scenario.description}
+                  steps={bab1Scenario.steps}
+                />
+              </div>
+
               <div className="flex gap-2">
                 <button
                   onClick={() => toggleChapter(1)}
@@ -693,6 +967,18 @@ export function LearningModule() {
                 Satu komunitas aktif yang dirawat dengan baik bisa menghasilkan 8–15 leads per bulan secara konsisten. Dengan 7 komunitas aktif (target 35% dari 20 komunitas), PAO berpotensi mendapatkan 56–105 leads per bulan — lebih dari cukup untuk memenuhi target AF 300 Juta.
               </InsightBox>
 
+              {/* Quiz Section */}
+              <div className="border-t pt-6">
+                <h4 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wide flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">Q</span>
+                  Quiz: Uji Pemahaman Anda
+                </h4>
+                <QuizCard 
+                  title="Quiz Bab 2: Hunting & Mapping Komunitas"
+                  questions={bab2Quiz}
+                />
+              </div>
+
               <div className="flex gap-2">
                 <button
                   onClick={() => toggleChapter(2)}
@@ -734,20 +1020,32 @@ export function LearningModule() {
                   Framework 2C — First Screening yang Efektif
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {screeningFramework.map((item, idx) => (
-                    <div key={idx} className="border rounded-lg p-4">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div
-                          className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-medium"
-                          style={{ backgroundColor: idx === 0 ? '#E6F1FB' : '#EAF3DE', color: idx === 0 ? '#185FA5' : '#3B6D11' }}
-                        >
-                          {item.icon}
-                        </div>
-                        <div className="font-medium text-sm">{item.title}</div>
-                      </div>
-                      <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
+                  <div className="border rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-medium bg-blue-100 text-blue-600">C1</div>
+                      <div className="font-medium text-sm">Cek Karakter</div>
                     </div>
-                  ))}
+                    <ul className="text-xs text-muted-foreground space-y-1">
+                      <li>• Reputasi di lingkungan — tanya Ketua RT</li>
+                      <li>• Riwayat pinjam-meminjam dengan tetangga</li>
+                      <li>• Keaktifan di kegiatan komunitas</li>
+                      <li>• Riwayat pembayaran arisan/cicilan</li>
+                      <li>• Konflik keuangan di lingkungan?</li>
+                    </ul>
+                  </div>
+                  <div className="border rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-medium bg-green-100 text-green-600">C2</div>
+                      <div className="font-medium text-sm">Cek Kapasitas</div>
+                    </div>
+                    <ul className="text-xs text-muted-foreground space-y-1">
+                      <li>• Usaha berjalan minimal 6 bulan</li>
+                      <li>• Ada bukti fisik — toko, lapak, stok</li>
+                      <li>• Ada cashflow harian terukur</li>
+                      <li>• Tujuan pinjaman produktif</li>
+                      <li>• Rasio cicilan vs pendapatan wajar</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
@@ -794,6 +1092,31 @@ export function LearningModule() {
               <InsightBox color="#BA7517">
                 Leads to Order 50% bukan hanya angka KPI — ini cerminan seberapa efektif sistem seleksimu. Setiap leads yang masuk dan kemudian di-reject adalah sumber daya (waktu, tenaga, biaya) yang terbuang. Investasi dalam kualitas leads adalah investasi dalam efisiensi keseluruhan operasional PAO.
               </InsightBox>
+
+              {/* Quiz Section */}
+              <div className="border-t pt-6">
+                <h4 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wide flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xs">Q</span>
+                  Quiz: Uji Pemahaman Anda
+                </h4>
+                <QuizCard 
+                  title="Quiz Bab 3: Lead Generation & Filtering"
+                  questions={bab3Quiz}
+                />
+              </div>
+
+              {/* Scenario Simulator */}
+              <div className="border-t pt-6">
+                <h4 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wide flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs">S</span>
+                  Simulasi: Praktik Screening
+                </h4>
+                <ScenarioSimulator 
+                  title={bab3Scenario.title}
+                  description={bab3Scenario.description}
+                  steps={bab3Scenario.steps}
+                />
+              </div>
 
               <div className="flex gap-2">
                 <button
@@ -898,6 +1221,18 @@ export function LearningModule() {
               <InsightBox color="#D4537E">
                 PAO mature tidak lebih keras bekerja — ia bekerja lebih cerdas. Dengan sistem komunitas yang kuat, monitoring berbasis jaringan, dan data yang terkelola, ia memiliki lebih banyak waktu untuk hal-hal strategis yang terus meningkatkan performa jangka panjang.
               </InsightBox>
+
+              {/* Quiz Section */}
+              <div className="border-t pt-6">
+                <h4 className="mb-4 text-sm font-semibold text-foreground uppercase tracking-wide flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs">Q</span>
+                  Quiz: Uji Pemahaman Anda
+                </h4>
+                <QuizCard 
+                  title="Quiz Bab 4: Menjaga Kualitas Portofolio"
+                  questions={bab4Quiz}
+                />
+              </div>
 
               <div className="flex gap-2">
                 <button
