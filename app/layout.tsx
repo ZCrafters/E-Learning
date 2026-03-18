@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
@@ -11,13 +11,6 @@ export const metadata: Metadata = {
   description: 'Strategic Partnership Account Officer training module with comprehensive curriculum, KPI tracking, and professional development resources.',
   keywords: ['PAO', 'e-learning', 'training', 'account officer', 'professional development'],
   generator: 'v0.app',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-    themeColor: '#378ADD',
-  },
   icons: {
     icon: [
       {
@@ -35,6 +28,14 @@ export const metadata: Metadata = {
     ],
     apple: '/apple-icon.png',
   },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: '#378ADD',
 }
 
 export default function RootLayout({
